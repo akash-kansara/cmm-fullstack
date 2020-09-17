@@ -41,7 +41,20 @@
         }
       },
       "get": {
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "type": "integer",
+            "description": "Limit"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer",
+            "description": "Offset"
+          }
+        ],
         "description": "",
         "tags": [
           "User"
