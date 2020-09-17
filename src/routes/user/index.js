@@ -7,7 +7,11 @@ const ctrl = require('../../controller/user');
 
 router.get('/', async (req, res) => {
   try {
-    let result = await ctrl.getUsers(lo.get(req.query, 'limit'), lo.get(req.query, 'offset'));
+    let result = await ctrl.getUsers(
+      lo.get(req.query, 'limit'),
+      lo.get(req.query, 'offset'),
+      lo.get(req.query, 'name')
+    );
     res.send(result);
   } catch (err) {
     res.status(500).send(err);

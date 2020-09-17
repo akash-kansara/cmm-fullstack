@@ -1,9 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import Hello from './components/hello/hello';
+import 'antd/dist/antd.css';
+
+import Home from './components/home/home';
 
 render(
-  <Hello />,
+  <Home />,
   document.getElementById('root')
 );

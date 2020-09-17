@@ -53,6 +53,12 @@
             "name": "offset",
             "type": "integer",
             "description": "Offset"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "type": "string",
+            "description": "Name contains"
           }
         ],
         "description": "",

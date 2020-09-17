@@ -16,16 +16,16 @@ async function createUser(user) {
     }
   } catch (err) {
     console.error(err);
-    return Promise.reject(`Could'nt create user`);
+    return Promise.reject(`Couldn't create user`);
   }
 }
 
-async function getUsers(limit, offset) {
+async function getUsers(limit, offset, name) {
   try {
-      return await repo.getUsers(limit, offset);
+      return await repo.getUsers(limit, offset, name);
   } catch (err) {
     console.error(err);
-    return Promise.reject(`Could'nt get users`);
+    return Promise.reject(`Couldn't get users`);
   }
 }
 
@@ -39,7 +39,7 @@ async function updateUser(user) {
     }
   } catch (err) {
     console.error(err);
-    return Promise.reject(`Could'nt update user`);
+    return Promise.reject(`Couldn't update user`);
   }
 }
 

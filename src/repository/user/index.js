@@ -11,7 +11,7 @@ async function createUser(user) {
     return Promise.resolve('User created');
   } catch (err) {
     console.error(err);
-    return Promise.reject(`Could'nt create user`);
+    return Promise.reject(`Couldn't create user`);
   }
 }
 
@@ -23,20 +23,28 @@ async function updateUser(user) {
     return Promise.resolve('User updated');
   } catch (err) {
     console.error(err);
-    return Promise.reject(`Could'nt update user`);
+    return Promise.reject(`Couldn't update user`);
   }
 }
 
-async function getUsers(limit = 1000, offset = 0) {
+async function getUsers(limit, offset, name) {
   try {
-    let result = await db.table(table)
-      .limit(limit)
-      .offset(offset)
-      .select();
+    let query = db.table(table);
+    if (typeof name === 'string' && name.length > 0)
+      query = query
+        .where(function () {
+          this.where('firstname', 'like', `%${name}%`)
+            .orWhere('lastname', 'like', `%${name}%`)
+        });
+    if (typeof limit === 'number')
+      query = query.limit(limit);
+    if (typeof offset === 'number')
+      query = query.offset(offset)
+    let result = await query.select();
     return Promise.resolve(result);
   } catch (err) {
     console.error(err);
-    return Promise.reject(`Could'nt get users`);
+    return Promise.reject(`Couldn't get users`);
   }
 }
 
