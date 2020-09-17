@@ -1,6 +1,21 @@
-const express = require("express");
+require('./env');
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const swagger = require('./swagger');
+const routes = require('./routes');
 
 const app = express();
 
-app.use(express.static("dist"));
-app.listen(8080, () => console.log("Listening on port 8080!"));
+const PORT = process.env['APP.PORT'] || 3000;
+
+app.use(express.static('dist'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/swagger', swagger);
+app.use(routes);
+
+app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
