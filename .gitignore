@@ -1,0 +1,7 @@
+dist/
+
+# .env file should be part of gitignore, but for simplicity we keep it in repo
+# .env
+
+node_modules/
+package-lock.json
