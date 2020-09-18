@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-
-import { Table, Space } from 'antd';
-import { Button } from 'antd';
+import React, { Component, useEffect, useState } from 'react';
+import { Button, Space } from 'antd';
 import Avatar from 'react-avatar';
 
 import { getUser } from '../../service/user';
 
-import FormModal from '../user/form-modal';
+import { Modal, Table } from '../../base';
+import UpsertForm from './upsert-form';
 
 const columns = [
   {
@@ -32,43 +31,69 @@ const columns = [
     title: 'Action',
     dataIndex: 'action',
     render: (text, record) => (
-      <Space size="middle">
-        <a>Invite {record.firstname}</a>
-        <a>Delete</a>
-      </Space>
+      <Actions user={record} />
     ),
   }
 ];
 
+function Actions(props) {
+  let visible = false;
+  function updateForm() {
+    visible = true;
+  }
+  function closeForm() {
+    visible = false;
+  }
+  return (
+    <Space size="small">
+      <Button size='small' type='primary' onClick={updateForm}>Edit</Button>
+      <Modal
+        title={'Edit User'}
+        component={<UpsertForm />}
+        visible={visible}
+        onOk={closeForm}
+        onCancel={closeForm}
+      />
+      <Button size='small' type='default' >Friends</Button>
+      <Button size='small' type='default'>Friends of friends</Button>
+    </Space>
+  )
+}
+
 class Dashboard extends Component {
   state = {
-    rows: [],
-    showForm: false,
-    selectedRow: null
+    data: [],
+    showForm: false
   }
   async componentDidMount() {
-    let rows = await getUser();
+    let data = await getUser();
     this.setState({
-      rows: rows
+      data: data
     });
   }
-  createForm () {
+  createForm() {
     this.setState({
       showForm: true
     });
-    console.log(this.state)
+  }
+  closeForm() {
+    this.setState({
+      showForm: false
+    });
   }
   render() {
     return (
       <>
-        <FormModal visible={this.state.showForm} />
-        <Button type='primary' style={{ margin: '10px' }}
-          onClick={() => this.createForm()}
-        >Create User</Button>
+        <Button type='primary' onClick={() => this.createForm()}>Create User</Button>
+        <Modal
+          title={'Create User'}
+          component={<UpsertForm />}
+          visible={this.state.showForm}
+          onOk={() => this.closeForm()}
+          onCancel={() => this.closeForm()}
+        />
         <Table
-          rowKey="id"
-          columns={columns} dataSource={this.state.rows}
-          pagination={{ defaultPageSize: 10 }}
+          rowKey={'id'} columns={columns} data={this.state.data}
         />
       </>
     );

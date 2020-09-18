@@ -1,6 +1,6 @@
 const lo = require('lodash');
 
-const db = require('../../db/mysql');
+const db = require('../../db');
 
 const table = 'user_mst';
 
