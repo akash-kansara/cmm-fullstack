@@ -7,7 +7,7 @@
     "build": "webpack --config ui/webpack.config.js",
     "start": "node src/index.js",
     "start:dev": "nodemon --config nodemon.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha \"test/**/*.js\" --exit --timeout 6000"
   },
   "repository": {
     "type": "git",
@@ -44,14 +44,18 @@
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^10.0.3",
     "babel-loader": "^8.1.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "circular-dependency-plugin": "^5.2.0",
     "clean-webpack-plugin": "^3.0.0",
     "compression-webpack-plugin": "^6.0.1",
     "css-loader": "^3.5.3",
     "dotenv-webpack": "^2.0.0",
+    "faker": "^5.1.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.2.0",
     "mini-css-extract-plugin": "^0.9.0",
+    "mocha": "^8.1.3",
     "node-sass": "^4.14.0",
     "nodemon": "^2.0.4",
     "react-app-polyfill": "^1.0.6",
