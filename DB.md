@@ -47,7 +47,11 @@ CREATE TABLE `friends` (
   `user_id` varchar(50) NOT NULL,
   `friend_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_friends_id` (`id`)
+  UNIQUE KEY `uq_friends_id` (`id`),
+  KEY `fk_friends_user_id_idx` (`user_id`),
+  KEY `fk_friends_friend_id_idx` (`friend_id`),
+  CONSTRAINT `fk_friends_friend_id` FOREIGN KEY (`friend_id`) REFERENCES `user_mst` (`id`),
+  CONSTRAINT `fk_friends_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_mst` (`id`)
 );
 ```
 ##

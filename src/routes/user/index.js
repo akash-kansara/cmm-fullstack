@@ -8,9 +8,9 @@ const router = Router();
 router.get('/', async (req, res) => {
   try {
     let result = await ctrl.getUsers(
-      lo.get(req.query, 'limit'),
-      lo.get(req.query, 'offset'),
-      lo.get(req.query, 'name')
+      parseInt(lo.get(req.query, 'limit')),
+      parseInt(lo.get(req.query, 'offset')),
+      parseInt(lo.get(req.query, 'name'))
     );
     res.send(result);
   } catch (err) {

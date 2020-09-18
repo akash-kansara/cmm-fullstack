@@ -31,15 +31,15 @@ async function getUsers(limit, offset, name) {
   try {
     let query = db.table(table);
     if (typeof name === 'string' && name.length > 0)
-      query = query
+      query
         .where(function () {
           this.where('firstname', 'like', `%${name}%`)
             .orWhere('lastname', 'like', `%${name}%`)
         });
     if (typeof limit === 'number')
-      query = query.limit(limit);
+      query.limit(limit);
     if (typeof offset === 'number')
-      query = query.offset(offset)
+      query.offset(offset);
     let result = await query.select();
     return Promise.resolve(result);
   } catch (err) {

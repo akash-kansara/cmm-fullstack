@@ -14,7 +14,7 @@ function UpsertForm(props) {
     try {
       await form.validateFields();
       let result;
-      switch(mode) {
+      switch (mode) {
         case 'CREATE': {
           let user = form.getFieldsValue();
           result = await createUser(user);
@@ -33,7 +33,7 @@ function UpsertForm(props) {
       form.resetFields();
       props.submit();
     } catch (err) {
-
+      console.log(err);
     }
   }
 

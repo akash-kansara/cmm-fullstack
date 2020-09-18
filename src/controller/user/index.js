@@ -12,11 +12,14 @@ async function createUser(user) {
     if (error)
       return Promise.reject(error);
     else {
-      return await repo.createUser(user);
+      return await repo.createUser(value);
     }
   } catch (err) {
-    console.error(err);
-    return Promise.reject(`Couldn't create user`);
+    console.error(err);return Promise.reject(
+      typeof err === 'string'
+      ? err
+      : `Couldn't create user`
+    );
   }
 }
 
@@ -24,8 +27,11 @@ async function getUsers(limit, offset, name) {
   try {
       return await repo.getUsers(limit, offset, name);
   } catch (err) {
-    console.error(err);
-    return Promise.reject(`Couldn't get users`);
+    console.error(err);return Promise.reject(
+      typeof err === 'string'
+      ? err
+      : `Couldn't get users`
+    );
   }
 }
 
@@ -35,11 +41,14 @@ async function updateUser(user) {
     if (error)
       return Promise.reject(error);
     else {
-      return await repo.updateUser(user);
+      return await repo.updateUser(value);
     }
   } catch (err) {
-    console.error(err);
-    return Promise.reject(`Couldn't update user`);
+    console.error(err);return Promise.reject(
+      typeof err === 'string'
+      ? err
+      : `Couldn't update user`
+    );
   }
 }
 
