@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Space } from 'antd';
-import Avatar from 'react-avatar';
+import { Button, Space, Avatar } from 'antd';
 
 import { getUser } from '../../service/user';
 
 import { Modal, Table } from '../../base';
 import UpsertForm from './upsert-form';
+import FriendsList from './friends-list';
 
 function Dashboard(props) {
   const [data, setData] = useState([]);
@@ -24,6 +24,8 @@ function Dashboard(props) {
   }
   function Actions(props) {
     const [visible, setVisible] = useState(false);
+    const [l1FriendsVisible, setL1FriendsVisible] = useState(false);
+    const [l2FriendsVisible, setL2FriendsVisible] = useState(false);
     return (
       <Space size="small">
         <Button size='small' type='primary' onClick={setVisible.bind(this, true)}>Edit</Button>
@@ -35,8 +37,26 @@ function Dashboard(props) {
           visible={visible}
           footer={null}
         />
-        <Button size='small' type='default' >Friends</Button>
-        <Button size='small' type='default'>Friends of friends</Button>
+        <Button size='small' type='default' onClick={setL1FriendsVisible.bind(this, true)}>Friends</Button>
+        <Modal
+          title={null}
+          component={
+            <FriendsList user={props.user} level={1} />
+          }
+          visible={l1FriendsVisible}
+          okButtonProps={{ style: { display: 'none' } }}
+          onCancel={setL1FriendsVisible.bind(this, false)}
+        />
+        <Button size='small' type='default' onClick={setL2FriendsVisible.bind(this, true)}>Friends of friends</Button>
+        <Modal
+          title={null}
+          component={
+            <FriendsList user={props.user} level={2} />
+          }
+          visible={l2FriendsVisible}
+          okButtonProps={{ style: { display: 'none' } }}
+          onCancel={setL2FriendsVisible.bind(this, false)}
+        />
       </Space>
     )
   }

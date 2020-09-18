@@ -40,8 +40,9 @@ async function getFriends(user_id, level) {
       query
         .join(table, `${user_table}.id`, `=`, `${table}.friend_id`)
         .whereIn(`${table}.user_id`, function () {
-          this.table(table).select(`friend_id`).where(`user_id`, user_id);
-        });
+          this.table(table).distinct(`friend_id`).where(`user_id`, user_id);
+        })
+        .groupBy(`${user_table}.id`);
       result = await query.select(
         db.ref(`${user_table}.id`, 'id'),
         db.ref(`${user_table}.firstname`, 'firstname'),

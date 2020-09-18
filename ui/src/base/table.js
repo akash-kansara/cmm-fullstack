@@ -9,7 +9,8 @@ function MyTable(props) {
       rowKey={props.rowKey}
       columns={props.columns}
       dataSource={data}
-      pagination={{ defaultPageSize: 10 }}
+      pagination={{ defaultPageSize: props.defaultPageSize || 10 }}
+      showHeader={props.showHeader || true}
     >
     </Table>
   )

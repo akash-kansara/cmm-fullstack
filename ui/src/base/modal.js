@@ -10,10 +10,13 @@ function MyModal(props) {
     <Modal
       title={props.title || ''}
       visible={visible}
-      closable={false}
+      closable={props.closable || false}
       footer={props.footer}
+      cancelButtonProps={{...props.cancelButtonProps}}
+      okButtonProps={{...props.okButtonProps}}
       onOk={props.onOk}
       onCancel={props.onCancel}
+      destroyOnClose={props.destroyOnClose || true}
     >
       {props.component}
     </Modal>
