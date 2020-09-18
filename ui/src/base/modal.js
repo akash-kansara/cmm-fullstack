@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import { Modal } from 'antd';
 
 function MyModal(props) {
@@ -12,6 +11,7 @@ function MyModal(props) {
       title={props.title || ''}
       visible={visible}
       closable={false}
+      footer={props.footer}
       onOk={props.onOk}
       onCancel={props.onCancel}
     >

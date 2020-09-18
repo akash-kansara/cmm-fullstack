@@ -1,9 +1,9 @@
 const lo = require('lodash');
 const { Router } = require('express');
 
-const router = Router();
-
 const ctrl = require('../../controller/user');
+
+const router = Router();
 
 router.get('/', async (req, res) => {
   try {

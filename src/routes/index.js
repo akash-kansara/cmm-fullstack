@@ -1,11 +1,11 @@
 const { Router } = require('express');
 
 const user = require('./user');
-const friends = require('./friends');
+const friend = require('./friend');
 
 const router = Router();
 
 router.use('/user', user);
-router.use('/friends', friends);
+router.use('/friend', friend);
 
 module.exports = router;

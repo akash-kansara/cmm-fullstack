@@ -102,6 +102,67 @@
           }
         }
       }
+    },
+    "/friend": {
+      "post": {
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateFriend"
+            }
+          }
+        ],
+        "description": "",
+        "tags": [
+          "Friend"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/OPStatus"
+            }
+          }
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "description": "User ID"
+          },
+          {
+            "in": "query",
+            "name": "level",
+            "type": "integer",
+            "required": true,
+            "description": "Level of friendship"
+          }
+        ],
+        "description": "",
+        "tags": [
+          "Friend"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -117,6 +178,19 @@
         "avatar": {
           "type": "string",
           "format": "url"
+        }
+      }
+    },
+    "CreateFriend": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "friend_id": {
+          "type": "string",
+          "format": "uuid"
         }
       }
     },
@@ -149,6 +223,10 @@
     {
       "name": "User",
       "description": "To manage user data"
+    },
+    {
+      "name": "Friend",
+      "description": "To manage friend data"
     }
   ]
 }

@@ -42,5 +42,12 @@ CREATE TABLE `user_mst` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_user_mst_id` (`id`)
 );
+CREATE TABLE `friends` (
+  `id` varchar(50) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
+  `friend_id` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_friends_id` (`id`)
+);
 ```
 ##

@@ -11,14 +11,13 @@ function createUser(user) {
         if (err)
           return reject(`Couldn't create user`)
         else
-          return resolve(res.body);
+          return resolve(res.text);
       })
   });
 }
 
 function getUser(limit, offset, name) {
   return new Promise((resolve, reject) => {
-    let url = serverUrl;
     superagent.get(serverUrl + `/user`)
       .query({ limit, offset, name })
       .end((err, res) => {
@@ -39,7 +38,7 @@ function updateUser(user) {
         if (err)
           return reject(`Couldn't update user`)
         else
-          return resolve(res.body);
+          return resolve(res.text);
       })
   });
 }
