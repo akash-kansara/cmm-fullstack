@@ -1,4 +1,5 @@
 const lo = require('lodash');
+const { off } = require('superagent');
 
 const db = require('../../db');
 
@@ -36,9 +37,9 @@ async function getUsers(limit, offset, name) {
           this.where('firstname', 'like', `%${name}%`)
             .orWhere('lastname', 'like', `%${name}%`)
         });
-    if (typeof limit === 'number')
+    if (!isNaN(limit))
       query.limit(limit);
-    if (typeof offset === 'number')
+    if (!isNaN(offset))
       query.offset(offset);
     let result = await query.select();
     return Promise.resolve(result);
